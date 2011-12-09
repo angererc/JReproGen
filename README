@@ -1,0 +1,49 @@
+Thoughts:
+
+maybe I should add another step after the "model" and get some data structures that are more grammar like.
+
+e.g.:
+
+interface B1 {
+  B2 create(int i);
+}
+
+interface B2 {
+  String foo();
+  void bar(String f);
+}
+ 
+becomes grammar:
+
+//types and generators (depend on context)
+@B1.String ::= literalString
+@B2.String ::= literalString | Foo //inside context B2, generators for String are literals or foo
+@B1.Int    ::= literalInt
+@B2.Int    ::= literalInt
+@B1.B2     ::= Create
+
+//methods
+@B2.Foo ::= <call>
+@B1.Create  ::= <call> Int B2.Body
+@B2.Bar ::= <call> String
+
+//contexts
+B2.Body ::= (Foo | Bar)* <end>
+
+
+<end> is a special tag that says that we end the sub context. E.g., the final ; in a method chain or a pop in a stack or something
+
+
+
+@Processor.Disk ::= @Processor.disk
+@Disk.Disk ::= @Disk.size | @Disk.speed | @Disk.disk
+
+@Processor.disk ::= 'processor.disk' @Disk.body
+@Disk.size ::= 'disk.size' int
+@Disk.speed ::= 'disk.speed' int
+@Disk.disk ::= 'disk.disk' @Disk.Body
+
+@Processor.Body ::= (@Processor.disk)* <end>
+@Disk.body ::= (@Disk.size | @Disk.speed | @Disk.disk )* <end>
+
+processor.disk disk.speed 12 disk.size 42 disk.speed 99 disk.disk disk.speed 1 <end> <end> <end> 
