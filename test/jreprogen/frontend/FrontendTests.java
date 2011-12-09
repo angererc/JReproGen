@@ -34,7 +34,7 @@ public class FrontendTests {
 	@Test
 	public void testParsingComputerBuilder() {
 		
-		ModelFromJavaClassParser parser = new ModelFromJavaClassParser();
+		JavaClassParser parser = new JavaClassParser();
 		Model model = parser.parse(ComputerBuilder.class, ProcessorBuilder.class, DiskBuilder.class);
 		
 		model.describeTo(System.out);

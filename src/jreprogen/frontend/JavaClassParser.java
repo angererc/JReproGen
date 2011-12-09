@@ -9,7 +9,7 @@ import jreprogen.model.builder.OptionBuilder;
 import jreprogen.model.builder.PhraseBuilder;
 import jreprogen.model.builder.ValueBuilder;
 
-public class ModelFromJavaClassParser {
+public class JavaClassParser {
 
 	/**
 	 * The list of builders defines the build contexts; other external class types ocurring in the
