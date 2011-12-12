@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
-import jreprogen.ast.ASTGenerator;
 import jreprogen.model.Model;
 
 import org.junit.Test;
@@ -41,7 +40,5 @@ public class FrontendTests {
 		
 		assertNotNull(model.getContext(ProcessorBuilder.class.getCanonicalName()));
 		
-		ASTGenerator gen = new ASTGenerator();
-		gen.generateAST(model);
 	}
 }

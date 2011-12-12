@@ -9,7 +9,7 @@ import java.io.PrintStream;
  * @author angererc
  *
  */
-public class Option {
+public class Option implements Generator {
 
 	private Phrase phrase;
 	private final Value generatedValue;
@@ -29,6 +29,7 @@ public class Option {
 		this.phrase = phrase;
 	}
 	
+	@Override
 	public Value getGeneratedValue() {
 		return generatedValue;
 	}
@@ -36,6 +37,9 @@ public class Option {
 	public Value[] getValues() {
 		return values;
 	}
+	
+	@Override
+	public <T> T map(GeneratorMapper<T> mapper) { return mapper.map(this); }
 	
 	public void traverse(Visitor v) {
 		v.visit(this);

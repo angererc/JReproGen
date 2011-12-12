@@ -29,9 +29,7 @@ public class OptionBuilder {
 	public Option build(Model model) {
 		Value[] values = new Value[params.size()];
 		values = params.toArray(values);
-		
-		Value resolvedReturn = generatedValue.resolveReferences(model);
-		return new Option(resolvedReturn, values);
+		return new Option(generatedValue, values);
 		
 	}
 }

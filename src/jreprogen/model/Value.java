@@ -3,28 +3,20 @@ package jreprogen.model;
 public interface Value {
 	
 	public static final Value VoidVal = new Value() {
-		@Override public Value resolveReferences(Model model) { return this; }
-		@Override public String toString() { return "Void"; } 
-		@Override public String asNodeName() { return "VoidNode"; } 
-		@Override public String asJavaType() { return "Void"; } 
+		@Override public String toString() { return "Void"; }
+		@Override public <T> T map(ValueMapper<T> mapper) { return mapper.mapVoidValue(); }
 	};
 	public static final Value IntVal = new Value() { 
-		@Override public Value resolveReferences(Model model) { return this; }
-		@Override public String toString() { return "Int"; } 
-		@Override public String asNodeName() { return "IntNode"; }
-		@Override public String asJavaType() { return "Integer"; }
+		@Override public String toString() { return "Int"; }
+		@Override public <T> T map(ValueMapper<T> mapper) { return mapper.mapIntValue(); }
 	};
 	public static final Value BoolVal = new Value() { 
-		@Override public Value resolveReferences(Model model) { return this; }
-		@Override public String toString() { return "Bool"; } 
-		@Override public String asNodeName() { return "BoolNode"; }
-		@Override public String asJavaType() { return "Boolean"; }
+		@Override public String toString() { return "Bool"; }
+		@Override public <T> T map(ValueMapper<T> mapper) { return mapper.mapBoolValue(); }
 	};
 	public static final Value StringVal = new Value() { 
-		@Override public Value resolveReferences(Model model) { return this; }
-		@Override public String toString() { return "String"; } 
-		@Override public String asNodeName() { return "StringNode"; }
-		@Override public String asJavaType() { return "String"; }
+		@Override public String toString() { return "String"; }
+		@Override public <T> T map(ValueMapper<T> mapper) { return mapper.mapStringValue(); }
 	};
 	
 	public static class ObjectVal implements Value {
@@ -34,10 +26,6 @@ public interface Value {
 		}
 		public Class<?> getType() {
 			return type;
-		}
-		@Override 
-		public Value resolveReferences(Model model) { 
-			return this; 
 		}
 		@Override 
 		public boolean equals(Object obj) {
@@ -56,9 +44,7 @@ public interface Value {
 		public String toString() { 
 			return "ObjectVal(" + type.getCanonicalName() + ")"; 
 		} 
-		
-		@Override public String asNodeName() { return type.getCanonicalName().replace('.', '_') + "Node"; }
-		@Override public String asJavaType() { return type.getCanonicalName(); }
+		@Override public <T> T map(ValueMapper<T> mapper) { return mapper.map(this); }
 	}
 	
 	public static class ContextRef implements Value {
@@ -68,11 +54,6 @@ public interface Value {
 		}
 		public String getName() {
 			return name;
-		}
-		
-		@Override 
-		public Value resolveReferences(Model model) { 
-			return model.getContext(name); 
 		}
 		@Override 
 		public boolean equals(Object obj) {
@@ -91,15 +72,11 @@ public interface Value {
 		public String toString() { 
 			return "ContextRef(" + name + ")"; 
 		} 
-		
-		@Override public String asNodeName() { return name.replace('.', '_') + "Node"; }
-		@Override public String asJavaType() { return name; }
+		@Override public <T> T map(ValueMapper<T> mapper) { return mapper.map(this); }
 	};
 	
 	/*
 	 * Value interface
 	 */
-	Value resolveReferences(Model model);
-	String asNodeName();
-	String asJavaType();
+	<T> T map(ValueMapper<T> mapper);
 }
