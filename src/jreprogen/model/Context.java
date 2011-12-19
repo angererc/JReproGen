@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import jreprogen.codegen.Message;
+import jreprogen.Message;
 
 /**
  * A context contains phrases that are allowed in the context.
@@ -24,7 +24,7 @@ public class Context {
 	private Map<String, Phrase> phrases = new HashMap<String,Phrase>();
 	
 	private Set<Value> usedValues;
-	private Map<Value,List<Generator>> generatorMap;
+	private Map<Value,List<Expression>> generatorMap;
 	
 	public Context(String name) {
 		this.name = name;
@@ -74,12 +74,12 @@ public class Context {
 		return usedValues != null && generatorMap != null;
 	}
 	
-	public Map<Value,List<Generator>> getGeneratorMap() {
+	public Map<Value,List<Expression>> getGeneratorMap() {
 		return generatorMap;
 	}
 	
-	public List<Generator> getGeneratorsForValue(Value val) {
-		List<Generator> result = generatorMap.get(val);
+	public List<Expression> getGeneratorsForValue(Value val) {
+		List<Expression> result = generatorMap.get(val);
 		if(result == null) {
 			return Collections.emptyList();
 		} else {
@@ -103,18 +103,18 @@ public class Context {
 		
 	}
 	
-	private void addGeneratorToMap(Map<Value,List<Generator>> map, Generator gen) {
+	private void addGeneratorToMap(Map<Value,List<Expression>> map, Expression gen) {
 		Value generatedValue = gen.getGeneratedValue();
-		List<Generator> list = map.get(generatedValue);
+		List<Expression> list = map.get(generatedValue);
 		if(list == null) {
-			list = new ArrayList<Generator>();
+			list = new ArrayList<Expression>();
 			map.put(generatedValue, list);
 		}
 		list.add(gen);
 	}
 	
 	private void collectGeneratorMap() {
-		generatorMap = new HashMap<Value,List<Generator>>();
+		generatorMap = new HashMap<Value,List<Expression>>();
 		
 		//collect phrase options that generate non-void values
 		this.traverse(new AbstractVisitor() {
@@ -129,13 +129,13 @@ public class Context {
 		
 		//add the immediates, if used
 		if(usedValues.contains(Value.BoolVal))
-			addGeneratorToMap(generatorMap, Generator.ImmediateBool);
+			addGeneratorToMap(generatorMap, Expression.ImmediateBool);
 		
 		if(usedValues.contains(Value.IntVal))
-			addGeneratorToMap(generatorMap, Generator.ImmediateInt);
+			addGeneratorToMap(generatorMap, Expression.ImmediateInt);
 		
 		if(usedValues.contains(Value.StringVal))
-			addGeneratorToMap(generatorMap, Generator.ImmediateString);
+			addGeneratorToMap(generatorMap, Expression.ImmediateString);
 		
 	}
 	

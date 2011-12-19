@@ -1,4 +1,4 @@
-package jreprogen.codegen;
+package jreprogen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,26 +6,26 @@ import java.util.List;
 import javassist.ClassPool;
 import jreprogen.model.Model;
 
-public class CodeGenerator {
+public class Compiler {
 	
 	private final Model model;
 	
-	private final List<CodeGeneratorPass> passes = new ArrayList<CodeGeneratorPass>();
+	private final List<CompilerPass> passes = new ArrayList<CompilerPass>();
 	
 	private ClassPool classPool = ClassPool.getDefault();
 	
-	public CodeGenerator(Model model) {
+	public Compiler(Model model) {
 		this.model = model;
 	}
 	
-	public void addPass(CodeGeneratorPass pass) {
+	public void addPass(CompilerPass pass) {
 		passes.add(pass);
 	}
 	
 	public List<Message> generate() {
 		List<Message> messages = new ArrayList<Message>();
 		
-		for(CodeGeneratorPass pass : passes) {
+		for(CompilerPass pass : passes) {
 			try {
 				pass.generate(this, messages);
 			} catch(Exception ex) {

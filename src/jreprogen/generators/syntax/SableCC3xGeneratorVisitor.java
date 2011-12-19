@@ -1,6 +1,15 @@
-package jreprogen.codegen.syntax;
+package jreprogen.generators.syntax;
 
 import java.io.PrintStream;
+
+import jreprogen.syntax.Alternative;
+import jreprogen.syntax.ComplexElement;
+import jreprogen.syntax.Element;
+import jreprogen.syntax.Grammar;
+import jreprogen.syntax.LiteralElement;
+import jreprogen.syntax.LiteralToken;
+import jreprogen.syntax.Production;
+import jreprogen.syntax.SyntaxVisitor;
 
 public class SableCC3xGeneratorVisitor implements SyntaxVisitor, Element.ModifierMapper<String> {
 
@@ -31,7 +40,7 @@ public class SableCC3xGeneratorVisitor implements SyntaxVisitor, Element.Modifie
 	}
 
 	@Override
-	public void visit(KeywordToken token) {
+	public void visit(LiteralToken token) {
 		stream.printf("\t%s = '%s';\n", token.asIdentifier(), token.getKeyword());
 	}
 	
@@ -58,7 +67,7 @@ public class SableCC3xGeneratorVisitor implements SyntaxVisitor, Element.Modifie
 	}
 
 	@Override
-	public void visit(KeywordElement keyword) {
+	public void visit(LiteralElement keyword) {
 		stream.print("T.");
 		stream.print(keyword.getToken().asIdentifier());
 		stream.print(keyword.getModifier().map(this));

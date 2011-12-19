@@ -1,8 +1,8 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 import java.util.List;
 
-import jreprogen.codegen.Message;
+import jreprogen.Message;
 
 public abstract class Element {
 

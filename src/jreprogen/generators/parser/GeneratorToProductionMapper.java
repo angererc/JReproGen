@@ -1,10 +1,10 @@
-package jreprogen.codegen.parser;
+package jreprogen.generators.parser;
 
 import jreprogen.model.Context;
-import jreprogen.model.GeneratorMapper;
+import jreprogen.model.Expression;
 import jreprogen.model.Option;
 
-public class GeneratorToProductionMapper implements GeneratorMapper<String> {
+public class GeneratorToProductionMapper implements Expression.Mapper<String> {
 
 	private final Context context;
 	

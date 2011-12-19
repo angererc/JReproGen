@@ -1,6 +1,6 @@
-package jreprogen.codegen.parser;
+package jreprogen.generators.parser;
 
-import jreprogen.codegen.GeneratorException;
+import jreprogen.CompilerException;
 import jreprogen.model.Context;
 import jreprogen.model.ValueMapper;
 import jreprogen.model.Value.ContextRef;
@@ -41,7 +41,7 @@ public class ValueToProductionNameMapper implements ValueMapper<String> {
 
 	@Override
 	public String mapVoidValue() {
-		throw new GeneratorException("Should not happen");
+		throw new CompilerException("Should not happen");
 	}
 
 }

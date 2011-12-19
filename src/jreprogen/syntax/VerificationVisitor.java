@@ -1,12 +1,12 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import jreprogen.codegen.Message;
-import static jreprogen.codegen.Message.*;
+import jreprogen.Message;
+import static jreprogen.Message.*;
 
 public class VerificationVisitor implements SyntaxVisitor {
 
@@ -40,7 +40,7 @@ public class VerificationVisitor implements SyntaxVisitor {
 	}
 	
 	@Override
-	public void visit(KeywordToken token) {
+	public void visit(LiteralToken token) {
 		
 	}
 
@@ -61,7 +61,7 @@ public class VerificationVisitor implements SyntaxVisitor {
 	}
 
 	@Override
-	public void visit(KeywordElement keyword) {
+	public void visit(LiteralElement keyword) {
 		
 	}
 

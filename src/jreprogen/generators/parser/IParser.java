@@ -1,4 +1,4 @@
-package jreprogen.codegen.parser;
+package jreprogen.generators.parser;
 
 public interface IParser {
 

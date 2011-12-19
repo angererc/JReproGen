@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jreprogen.codegen.Message;
+import jreprogen.Message;
 
 /**
  * The model collects all the contexts

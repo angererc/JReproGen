@@ -1,4 +1,4 @@
-package jreprogen.codegen.parser;
+package jreprogen.generators.parser;
 
 import java.util.List;
 
@@ -7,16 +7,16 @@ import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.CtNewMethod;
 
-import jreprogen.codegen.CodeGenerator;
-import jreprogen.codegen.CodeGeneratorPass;
-import jreprogen.codegen.GeneratorException;
-import jreprogen.codegen.Message;
+import jreprogen.Compiler;
+import jreprogen.CompilerPass;
+import jreprogen.CompilerException;
+import jreprogen.Message;
 import jreprogen.model.Context;
-import jreprogen.model.Generator;
+import jreprogen.model.Expression;
 import jreprogen.model.Model;
 import jreprogen.model.Value;
 
-public class GenerateParserPass implements CodeGeneratorPass {
+public class ParserGenerator implements CompilerPass {
 
 	/**
 	 * for each value used in a context (= used as a parameter in an option)
@@ -37,7 +37,7 @@ public class GenerateParserPass implements CodeGeneratorPass {
 			builder.append(usedValue.map(valueMapper));
 			builder.append(" ::= ");
 			boolean first = true;
-			for(Generator gen : context.getGeneratorsForValue(usedValue)) {
+			for(Expression gen : context.getGeneratorsForValue(usedValue)) {
 				if(! first) builder.append(", ");
 				builder.append(gen.map(generatorMapper));
 			}
@@ -68,13 +68,13 @@ public class GenerateParserPass implements CodeGeneratorPass {
 	}
 	
 	@Override
-	public void generate(CodeGenerator codeGenerator, List<Message> messages) throws Exception {
+	public void generate(Compiler codeGenerator, List<Message> messages) throws Exception {
 		
 		ClassPool pool = codeGenerator.getClassPool();
 		Model model = codeGenerator.getModel();
 		
 		if(! model.hasBeenValidated()) {
-			throw new GeneratorException("You have to validate the model first!");
+			throw new CompilerException("You have to validate the model first!");
 		}
 		
 		for(Context context : model.getContexts()) {

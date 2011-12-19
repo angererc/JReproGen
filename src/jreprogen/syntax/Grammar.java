@@ -1,4 +1,4 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,7 +21,7 @@ public class Grammar {
 		final Set<Token> tokens = new HashSet<Token>();
 		this.visitProductions(new AbstractSyntaxVisitor() {
 			@Override
-			public void visit(KeywordElement keyword) {
+			public void visit(LiteralElement keyword) {
 				tokens.add(keyword.getToken());
 			}
 		});

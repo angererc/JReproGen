@@ -1,4 +1,4 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 public class ComplexElement extends Element {
 

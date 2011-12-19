@@ -1,4 +1,4 @@
-package jreprogen.codegen;
+package jreprogen;
 
 public class Message {
 

@@ -1,4 +1,4 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 public abstract class Token {
 

@@ -1,4 +1,4 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 public abstract class AbstractSyntaxVisitor implements SyntaxVisitor {
 
@@ -9,7 +9,7 @@ public abstract class AbstractSyntaxVisitor implements SyntaxVisitor {
 	}
 	
 	@Override
-	public void visit(KeywordToken token) {
+	public void visit(LiteralToken token) {
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public abstract class AbstractSyntaxVisitor implements SyntaxVisitor {
 	}
 
 	@Override
-	public void visit(KeywordElement keyword) {
+	public void visit(LiteralElement keyword) {
 	}
 
 	@Override

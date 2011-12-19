@@ -1,4 +1,4 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
 import java.util.ArrayList;
 import java.util.List;

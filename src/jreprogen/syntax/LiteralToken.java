@@ -1,14 +1,14 @@
-package jreprogen.codegen.syntax;
+package jreprogen.syntax;
 
-public class KeywordToken extends Token {
+public class LiteralToken extends Token {
 
-	public static KeywordToken keyword(String token) {
-		return new KeywordToken(token);
+	public static LiteralToken literal(String token) {
+		return new LiteralToken(token);
 	}
 	
 	private final String keyword;
 	
-	public KeywordToken(String keyword) {
+	public LiteralToken(String keyword) {
 		this.keyword = keyword;
 	}
 	
@@ -33,8 +33,8 @@ public class KeywordToken extends Token {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof KeywordToken) {
-			KeywordToken other = (KeywordToken)obj;
+		if(obj instanceof LiteralToken) {
+			LiteralToken other = (LiteralToken)obj;
 			return other.keyword.equals(this.keyword);
 		} else {
 			return false;
