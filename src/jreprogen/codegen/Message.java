@@ -1,7 +1,19 @@
-package jreprogen.model;
+package jreprogen.codegen;
 
 public class Message {
 
+	public static Message message(String message) {
+		return new Message(message);
+	}
+	
+	public static Message message(Exception exception) {
+		return new Message(exception);
+	}
+	
+	public static Message message(String message, Exception exception) {
+		return new Message(message, exception);
+	}
+	
 	private final String message;
 	private final Exception exception;
 	

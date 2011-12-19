@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import jreprogen.codegen.Message;
+
 /**
  * A context contains phrases that are allowed in the context.
  * Corresponds to a builder(-interface)

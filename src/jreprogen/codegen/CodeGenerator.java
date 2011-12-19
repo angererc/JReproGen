@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javassist.ClassPool;
-import jreprogen.model.Message;
 import jreprogen.model.Model;
 
 public class CodeGenerator {

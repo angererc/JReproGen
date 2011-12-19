@@ -10,9 +10,9 @@ import javassist.CtNewMethod;
 import jreprogen.codegen.CodeGenerator;
 import jreprogen.codegen.CodeGeneratorPass;
 import jreprogen.codegen.GeneratorException;
+import jreprogen.codegen.Message;
 import jreprogen.model.Context;
 import jreprogen.model.Generator;
-import jreprogen.model.Message;
 import jreprogen.model.Model;
 import jreprogen.model.Value;
 
@@ -91,7 +91,7 @@ public class GenerateParserPass implements CodeGeneratorPass {
 		CtMethod parseMethod = CtNewMethod.make("public void parse() { System.out.println(\"Hello World\"); }", clazz);
 		clazz.addMethod(parseMethod);
 		
-		Class c = clazz.toClass();
+		Class<?> c = clazz.toClass();
 		IParser p = (IParser)c.newInstance();
 		p.parse();
 	}

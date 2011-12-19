@@ -2,7 +2,6 @@ package jreprogen.codegen;
 
 import java.util.List;
 
-import jreprogen.model.Message;
 
 public interface CodeGeneratorPass {
 
